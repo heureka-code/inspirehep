@@ -121,7 +121,7 @@ services:
       - ./backoffice/.envs/local/.postgres
     ports:
       - '8001:8001'
-    command: sh -c 'poetry run python manage.py migrate && poetry run python manage.py opensearch index rebuild --force && poetry run python manage.py opensearch document index --force && poetry run python manage.py runserver 0.0.0.0:8001'
+    command: sh -c 'uv run python manage.py migrate && uv run python manage.py opensearch index rebuild --force && uv run python manage.py opensearch document index --force && uv run python manage.py runserver 0.0.0.0:8001'
   cache:
     extends:
       file: docker-compose.services.yml

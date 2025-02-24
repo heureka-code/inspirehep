@@ -16,7 +16,7 @@ while test $# -gt 0; do
         --ci)
             # We are probably inside travis, check for env variables
             if [ "$REQUIREMENTS" == "prod" ]; then
-                flags=("--no-interaction" "--no-ansi" "--no-dev")
+                flags=("--no-interaction" "--locked" "--no-dev") # "--no-interaction" "--no-ansi" "--no-dev"
             fi
             shift
             ;;
@@ -28,7 +28,7 @@ while test $# -gt 0; do
     esac
 done
 if [ ${#flags[0]} -eq 0 ]; then
-    flags=("--no-interaction" "--no-ansi")
+    flags=("--no-progress" "--locked") # "--no-interaction" "--no-ansi"
 fi
 
-poetry install ${flags[@]}
+uv sync ${flags[@]}
